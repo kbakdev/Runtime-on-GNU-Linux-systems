@@ -41,3 +41,5 @@ First, read the address of the board *initarray* and its size stored in the `DT_
  0x0000000000000019 (INIT_ARRAY)         0x3db0 // In my case
  0x000000000000001b (INIT_ARRAYSZ)       16 (bytes)
 ```
+
+The memory address should now be converted into a file address.
