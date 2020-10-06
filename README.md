@@ -55,4 +55,10 @@ s3jk1@hopper:~/GitHub/Runtime-on-GNU-Linux-systems$ gcc test.c -o test-pic -fPIC
 The compilation results in two executables: test-nopic, which does not contain PIC code, and test-pic with PIC code. You can disassembly this with `objdump()` function.
 
 # GOT and PLT tables
+The operation of the GOT is related to the PLT mechanism.
+Compilation of the program is possible via the command line:
+```
+$ gcc readdir.c -o readdir
+```
 
+The program uses external symbols, implemented in another library, which will be marked as a dependent library. Symbols such as `opendir(3)`,`closedir(3)`, and` readdir(3)`will have to be localized by the loader during the program initialization process.
