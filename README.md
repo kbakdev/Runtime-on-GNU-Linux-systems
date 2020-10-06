@@ -42,4 +42,4 @@ First, read the address of the board *initarray* and its size stored in the `DT_
  0x000000000000001b (INIT_ARRAYSZ)       16 (bytes)
 ```
 
-The memory address should now be converted into a file address. Reading 16 bytes from the received address, we get the table of functions that are run in the program initialization phase. The program `dd(1)` can be used to dump the data. With the programs `dd(1)`, `od (1)`, and `nl(1)`, you can get valid function addresses. After inspecting each address with the `objdump(1)` disassembler, it can be concluded that the second address is responsible for running the `Test::Test()` constructor.
+The memory address should now be converted into a file address. Reading 16 bytes from the received address, we get the table of functions that are run in the program initialization phase. The program `dd(1)` can be used to dump the data. With the programs `dd(1)`, `od(1)`, and `nl(1)`, you can get valid function addresses. After inspecting each address with the `objdump(1)` disassembler, it can be concluded that the second address is responsible for running the `Test::Test()` constructor.
