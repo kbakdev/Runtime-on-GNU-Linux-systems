@@ -61,4 +61,4 @@ Compilation of the program is possible via the command line:
 $ gcc readdir.c -o readdir
 ```
 
-The program uses external symbols, implemented in another library, which will be marked as a dependent library. Symbols such as `opendir(3)`,`closedir(3)`, and` readdir(3)`will have to be localized by the loader during the program initialization process.
+The program uses external symbols, implemented in another library, which will be marked as a dependent library. Symbols such as `opendir(3)`, `closedir(3)`, and `readdir(3)` will have to be localized by the loader during the program initialization process.
