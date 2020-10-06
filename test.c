@@ -3,7 +3,7 @@
 int var1 = 1;
 int var2 = 2;
 
-void putst(int* ptr) {
+void putstr(int* ptr) {
     printf("val: %d\n", *ptr);
 }
 
