@@ -48,8 +48,8 @@ The memory address should now be converted into a file address. Reading 16 bytes
 Forced compilation to a form without PIC code is possible with the argument `-mcmodel=large`:
 
 ```
-s3jk1@hopper:~/GitHub/Runtime-on-GNU-Linux-systems$ gcc test.c -o test-nopic -mcmodel=large -O0
-s3jk1@hopper:~/GitHub/Runtime-on-GNU-Linux-systems$ gcc test.c -o test-pic -fPIC -O0
+$ gcc test.c -o test-nopic -mcmodel=large -O0
+$ gcc test.c -o test-pic -fPIC -O0
 ```
 
 The compilation results in two executables: test-nopic, which does not contain PIC code, and test-pic with PIC code. You can disassembly this with `objdump()` function.
