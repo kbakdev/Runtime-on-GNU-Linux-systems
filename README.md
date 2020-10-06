@@ -53,3 +53,6 @@ s3jk1@hopper:~/GitHub/Runtime-on-GNU-Linux-systems$ gcc test.c -o test-pic -fPIC
 ```
 
 The compilation results in two executables: test-nopic, which does not contain PIC code, and test-pic with PIC code. You can disassembly this with `objdump()` function.
+
+# GOT and PLT tables
+
