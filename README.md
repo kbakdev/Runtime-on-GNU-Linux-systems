@@ -43,3 +43,13 @@ First, read the address of the board *initarray* and its size stored in the `DT_
 ```
 
 The memory address should now be converted into a file address. Reading 16 bytes from the received address, we get the table of functions that are run in the program initialization phase. The program `dd(1)` can be used to dump the data. With the programs `dd(1)`, `od(1)`, and `nl(1)`, you can get valid function addresses. After inspecting each address with the `objdump(1)` disassembler, it can be concluded that the second address is responsible for running the `Test::Test()` constructor.
+
+# PIC Code
+Forced compilation to a form without PIC code is possible with the argument `-mcmodel=large`:
+
+```
+s3jk1@hopper:~/GitHub/Runtime-on-GNU-Linux-systems$ gcc test.c -o test-nopic -mcmodel=large -O0
+s3jk1@hopper:~/GitHub/Runtime-on-GNU-Linux-systems$ gcc test.c -o test-pic -fPIC -O0
+```
+
+The compilation results in two executables: test-nopic, which does not contain PIC code, and test-pic with PIC code. You can disassembly this with `objdump()` function.
