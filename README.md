@@ -62,3 +62,9 @@ $ gcc readdir.c -o readdir
 ```
 
 The program uses external symbols, implemented in another library, which will be marked as a dependent library. Symbols such as `opendir(3)`, `closedir(3)`, and `readdir(3)` will have to be localized by the loader during the program initialization process.
+
+During the compilation process, the compiler is able to determine the number of symbols imported from the dependent libraries. Therefore, it can reserve a place in the GOT for each such symbol. The initial values, i.e. those saved in the file, will be replaced with correct addresses in the memory of the imported functions while the program is running. The GOT is located at the address indicated by the symbol `_GLOBAL_OFFSET_TABLE_`, as seen by the symbol name and address dump tool `nm(1)`.
+
+```
+$ nm readdir | grep GLOBAL_OFFSET_TABLE
+```
