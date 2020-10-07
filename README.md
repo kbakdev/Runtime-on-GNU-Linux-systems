@@ -74,5 +74,3 @@ $ nm readdir | grep GLOBAL_OFFSET_TABLE
 
 The operation of the loader can be influenced by a set of options activated by setting the appropriate environment variables. The most frequently used variables are:
 * `LD_PRELOAD=<path>` - sets the library search path to the selected directory or directory list (separated by a colon).
-=======
->>>>>>> fb1e7357b6d6d41e5ae4783a3f929f2cacb45687
