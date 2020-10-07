@@ -73,6 +73,7 @@ $ nm readdir | grep GLOBAL_OFFSET_TABLE
 
 The operation of the loader can be influenced by a set of options activated by setting the appropriate environment variables. The most frequently used variables are:
 * `LD_PRELOAD=<path>` - sets the library search path to the selected directory or directory list (separated by a colon).
+* `LD_AUDIT=<path>` - points to a shared library that implements the `rtld-audit(7)` interface.
 
 # LD_PRELOAD
 It allows the selected library to be loaded into the process memory space early, before any dependent library declared in the `.dynamic` section is loaded. Thanks to this, the selected library has priority in determining the addresses of symbols imported by the application, and thus - it is possible to "override" functions from other libraries with your own implementations.
