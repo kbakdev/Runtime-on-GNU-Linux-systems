@@ -68,9 +68,13 @@ During the compilation process, the compiler is able to determine the number of 
 ```
 $ nm readdir | grep GLOBAL_OFFSET_TABLE
 ```
-<<<<<<< HEAD
 
 # Environment Variables
 
 The operation of the loader can be influenced by a set of options activated by setting the appropriate environment variables. The most frequently used variables are:
 * `LD_PRELOAD=<path>` - sets the library search path to the selected directory or directory list (separated by a colon).
+
+# LD_PRELOAD
+It allows the selected library to be loaded into the process memory space early, before any dependent library declared in the `.dynamic` section is loaded. Thanks to this, the selected library has priority in determining the addresses of symbols imported by the application, and thus - it is possible to "override" functions from other libraries with your own implementations.
+
+In the `shadow.c` program we have written, one of many possible scenarios is presented using the variable `LD_PRELOAD`. It shows overriding the `connect(2)` function by creating your own minimal library with its new implementation. The new function `connect(2)` uses the original function from the *libc* library, creating from the library a simple sniffer of addresses that the selected palette tries to connect to.
