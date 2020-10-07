@@ -68,3 +68,8 @@ During the compilation process, the compiler is able to determine the number of 
 ```
 $ nm readdir | grep GLOBAL_OFFSET_TABLE
 ```
+
+# Environment Variables
+
+The operation of the loader can be influenced by a set of options activated by setting the appropriate environment variables. The most frequently used variables are:
+* `LD_PRELOAD=<path>` - sets the library search path to the selected directory or directory list (separated by a colon).
