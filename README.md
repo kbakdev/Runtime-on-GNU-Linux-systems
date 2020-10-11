@@ -107,3 +107,9 @@ The `LD_PRELOAD` mechanism allows for the creation of a fairly effective isolati
 # LD_AUDIT
 
 The dependency graph between dependent libraries can sometimes be very complicated. With a non-standard system configuration or when a given program uses a number of libraries as dependencies and each of these libraries has its own dependencies, the reason for loading a given library is not always obvious. Problems with the process of locating dependent libraries or the desire to control this process can be solved by using a mechanism called `rtld-audit`.
+
+Calling the audit mechanism can be done in three ways:
+
+- defining the `LD_AUDIT` environment variable, which takes the path to the library implementing the correct interface accepted by `rtld-audit()`
+- using the bootloader `--audit` argument, specifying the path to the library as the argument
+- using the `DT_AUDIT` attribute in the `.dynamic` section; this attribute should contain the path to the library which is to act as the auditor.
