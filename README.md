@@ -110,6 +110,6 @@ The dependency graph between dependent libraries can sometimes be very complicat
 
 Calling the audit mechanism can be done in three ways:
 
-- defining the `LD_AUDIT` environment variable, which takes the path to the library implementing the correct interface accepted by `rtld-audit()`
-- using the bootloader `--audit` argument, specifying the path to the library as the argument
-- using the `DT_AUDIT` attribute in the `.dynamic` section; this attribute should contain the path to the library which is to act as the auditor.
+1. defining the `LD_AUDIT` environment variable, which takes the path to the library implementing the correct interface accepted by `rtld-audit()`
+2. using the bootloader `--audit` argument, specifying the path to the library as the argument
+3. using the `DT_AUDIT` attribute in the `.dynamic` section; this attribute should contain the path to the library which is to act as the auditor.
