@@ -133,3 +133,15 @@ A
 The demonstration of modifying the code will consist in changing the program in such a way that it does not end after reading one character, but runs indefinitely, until stopped by pressing the key combination CTRL + C. To do this, you will need the program *test* itself and a short script in the selected language (Python for me), which will execute the commands to write the appropriate code bytes to the right places. To write this script, the `ndisasm` program, which is part of the nasm package, will be used.
 
 Usually during work in which the memory of other programs is changed, for various reasons it is required to run them multiple times; either because the program lifetime is just very short, or because when you change the memory of a foreign program, you can't do it perfectly. Virtually every time the target program throws an exception `SIGSEGV`,` SIGILL`, or the like, because of an error in the code by manual modification of it. To make your work easier, it's best to write a script that automates the process identification and displaying the PID number to the standard output.
+
+The `getpid.py` script aims to search all directories in `/proc` and find one where a symbolic exe link points to some file in the same directory as the script. When running `test2` in another console, calling the script should display the PID of `test2`.
+
+**1st terminal**
+```
+$ ./test2
+```
+
+**2nd terminal**
+```
+$ sudo python3 getpid.py
+```
