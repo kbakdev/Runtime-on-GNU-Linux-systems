@@ -162,4 +162,3 @@ It is also possible to verify the written data with the command line, which dire
 ```
 
 Make sure you have the `nasm` package installed on your computer.
-
