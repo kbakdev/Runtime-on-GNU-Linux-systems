@@ -113,3 +113,23 @@ Calling the audit mechanism can be done in three ways:
 1. defining the `LD_AUDIT` environment variable, which takes the path to the library implementing the correct interface accepted by `rtld-audit()`
 2. using the bootloader `--audit` argument, specifying the path to the library as the argument
 3. using the `DT_AUDIT` attribute in the `.dynamic` section; this attribute should contain the path to the library which is to act as the auditor.
+
+# Code injection
+
+Compilation:
+
+```
+$ gcc test2.c -o test2
+```
+
+The program is limited to reading one character from the * stdin * stream, displaying its ASCII code, and then terminating it immediately. After entering one character and confirming with the * Enter * key, the program displays the ASCII code of the entered character and finishes its operation:
+
+```
+$ ./test
+A
+65
+```
+
+The demonstration of modifying the code will consist in changing the program in such a way that it does not end after reading one character, but runs indefinitely, until stopped by pressing the key combination CTRL + C. To do this, you will need the program *test* itself and a short script in the selected language (Python for me), which will execute the commands to write the appropriate code bytes to the right places. To write this script, the `ndisasm` program, which is part of the nasm package, will be used.
+
+Usually during work in which the memory of other programs is changed, for various reasons it is required to run them multiple times; either because the program lifetime is just very short, or because when you change the memory of a foreign program, you can't do it perfectly. Virtually every time the target program throws an exception `SIGSEGV`,` SIGILL`, or the like, because of an error in the code by manual modification of it. To make your work easier, it's best to write a script that automates the process identification and displaying the PID number to the standard output.
