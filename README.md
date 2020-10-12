@@ -180,3 +180,38 @@ When using this method, you will notice a fairly large limitation of being able 
 # Self-modifying code
 
 The *procfs* file system also enables each process to quickly locate its directory with files such as maps or mem. This is possible by using the special directory/proc/self, which for each process indicates its own directory /proc/`<pid>`. This means that by reading the /proc/self symbolic link, the program is able to determine its process ID without using the `getpid` system call.
+
+This property is shown in `mypid.py`.
+
+```
+$ python3 mypid.py
+```
+
+The script will display the current Python interpreter process ID each time it is run.
+
+The existence of /proc/self also means that a process can modify its own memory, bypassing restrictions on accessing it, by using the file /proc/self/mem, which will always point to the current process's mem file without needing to locate the appropriate directory in /proc. Thanks to this, the program can modify itself after opening its own mem file. There is no need to obtain root privileges as it is always possible for the owning process to open the mem file.
+
+The `selfmod.c` example shows an example of how a process can modify its memory in read-only areas, incl. in your code section.
+
+```
+$ gcc selfmod.c -o selfmod
+$ ./selfmod
+```
+
+The program calls the function `func` twice, but each time its operation is completely different. When it is called for the first time, it follows the code that can be read on lines 5 through 8, i.e. the function prints "Hello World!" And returns the value 0. Lines 15-19 contain the code that opens the file /proc/self/mem, they get the current address in the memory of the function `func` and write six bytes to this address: 0xB8, 0x42, 0x00, 0x00, 0x00 and 0xC3. These bytes are machine code, which can be viewed with e.g. `ndisasm`:
+
+```
+$ echo -en "\xb8\x42\x00\x00\x00\xC3" | ndisasm -b 64 -
+00000000  B842000000        mov eax,0x42
+00000005  C3                ret
+```
+
+This code overwrites the contents of the function `func()`, so it takes the form:
+
+```
+int func() {
+    return 0x42;
+}
+```
+
+It does not display any string and returns the number 0x42. This is exactly the behavior you observe during the second function call in the sample program.
