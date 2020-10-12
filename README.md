@@ -146,3 +146,20 @@ $ ./test2
 $ sudo python3 getpid.py
 ```
 
+The `procwrite.py` script uses the `getpid.py` script you wrote earlier to identify the *test* process, so you don't have to hard-write the process id.
+
+Saving the memory to the selected process is a matter of opening the mem file and saving the data to the selected address. Any restrictions on memory access rights will be ignored by the *procfs* driver itself, which will call the appropriate kernel functions to perform the write operation to the selected address in the memory of the selected foreign process.
+
+Launching the program should be performed as the root user, because it is the fastest method of obtaining the appropriate access rights to the mem file:
+```
+$ sudo python3 procwrite.py
+```
+
+It is also possible to verify the written data with the command line, which directly reads the code from memory and disassembles it using the `ndisasm` tool:
+
+```
+# dd if=/proc/`python3 getpid.py`/mem bs=1 skip=$((0x4005b0)) count=51 2>/dev/null | ndisasm -b 64 -
+```
+
+Make sure you have the `nasm` package installed on your computer.
+
