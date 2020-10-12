@@ -176,3 +176,7 @@ Correct use of the `ptrace` function requires attaching to the target process wi
 Usually the function `ptrace` returns -1 in case of an internal error, but for `PTRACE_PEEKTEXT` the function returns the value of the double word at the selected address. That is, if you read 0xFFFFFFFF, its return value will be just -1, but it will not be a failure value. For this reason, correctly determining the success of reading data from memory involves resetting the `errno` variable, performing the operation, and checking if the value of `errno` reports an error or not. On this basis, it is possible to deduce the correctness of the performed operation.
 
 When using this method, you will notice a fairly large limitation of being able to read only 4 bytes of memory (8 on a 64-bit system). If the user wants to change one byte, he has to use a 4-byte buffer, read 4 bytes, modify the buffer accordingly and write 4 bytes. This operation is much slower and compiled than the interface provided by /proc/pid/mem.
+
+# Self-modifying code
+
+The *procfs* file system also enables each process to quickly locate its directory with files such as maps or mem. This is possible by using the special directory/proc/self, which for each process indicates its own directory /proc/<pid>. This means that by reading the /proc/self symbolic link, the program is able to determine its process ID without using the `getpid` system call.
