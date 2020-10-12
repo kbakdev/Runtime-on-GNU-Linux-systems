@@ -179,4 +179,4 @@ When using this method, you will notice a fairly large limitation of being able 
 
 # Self-modifying code
 
-The *procfs* file system also enables each process to quickly locate its directory with files such as maps or mem. This is possible by using the special directory/proc/self, which for each process indicates its own directory /proc/<pid>. This means that by reading the /proc/self symbolic link, the program is able to determine its process ID without using the `getpid` system call.
+The *procfs* file system also enables each process to quickly locate its directory with files such as maps or mem. This is possible by using the special directory/proc/self, which for each process indicates its own directory /proc/`<pid>`. This means that by reading the /proc/self symbolic link, the program is able to determine its process ID without using the `getpid` system call.
